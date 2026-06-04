@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Ti, Mi Caramelito ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Quicksand:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Quicksand',sans-serif;
+background:#fff8f0;
+overflow-x:hidden;
+}
+
+.main-screen{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#fff5e6,#ffe6d5,#fff0f5);
+padding:20px;
+}
+
+.title-main{
+font-family:'Dancing Script',cursive;
+font-size:4rem;
+color:#c75b5b;
+text-align:center;
+margin-bottom:15px;
+}
+
+.subtitle-main{
+font-size:1.2rem;
+color:#8b6f47;
+margin-bottom:40px;
+text-align:center;
+}
+
+.bouquets-container{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:40px;
+}
+
+.bouquet-card{
+cursor:pointer;
+transition:.4s;
+text-align:center;
+}
+
+.bouquet-card:hover{
+transform:translateY(-10px) scale(1.05);
+}
+
+.bouquet-img{
+width:280px;
+height:350px;
+object-fit:contain;
+}
+
+.press-here{
+margin-top:15px;
+font-size:1.5rem;
+font-family:'Dancing Script',cursive;
+color:#8b6f47;
+}
+
+.sunflower-section,
+.rose-section{
+display:none;
+min-height:100vh;
+justify-content:center;
+align-items:center;
+padding:20px;
+position:relative;
+}
+
+.sunflower-section.active,
+.rose-section.active{
+display:flex;
+}
+
+.sunflower-section{
+background:linear-gradient(135deg,#fff5e6,#ffe7b8);
+}
+
+.rose-section{
+background:linear-gradient(135deg,#fff0f5,#ffe4e1);
+}
+
+.envelope-container{
+width:320px;
+height:220px;
+position:relative;
+cursor:pointer;
+}
+
+.envelope-back{
+position:absolute;
+width:100%;
+height:100%;
+background:#f5e6d3;
+}
+
+.envelope-front{
+position:absolute;
+bottom:0;
+width:100%;
+height:140px;
+background:#e8d5c0;
+clip-path:polygon(0 0,50% 60%,100% 0,100% 100%,0 100%);
+}
+
+.envelope-flap{
+position:absolute;
+width:100%;
+height:110px;
+background:#d4c4a8;
+clip-path:polygon(0 0,100% 0,100% 100%,50% 55%,0 100%);
+transform-origin:top;
+transition:.8s;
+}
+
+.envelope-container.opened .envelope-flap{
+transform:rotateX(180deg);
+}
+
+.envelope-seal{
+position:absolute;
+top:75px;
+left:50%;
+transform:translateX(-50%);
+background:#c75b5b;
+width:36px;
+height:36px;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+color:white;
+font-size:18px;
+}
+
+.letter-container{
+position:absolute;
+max-width:700px;
+width:90%;
+background:white;
+padding:35px;
+border-radius:10px;
+box-shadow:0 10px 40px rgba(0,0,0,.2);
+display:none;
+}
+
+.letter-container.visible{
+display:block;
+}
+
+.letter-header{
+text-align:center;
+margin-bottom:20px;
+}
+
+.letter-header h2{
+font-family:'Dancing Script',cursive;
+font-size:2.5rem;
+color:#c75b5b;
+}
+
+.letter-body{
+font-family:'Dancing Script',cursive;
+font-size:1.5rem;
+line-height:1.8;
+color:#5c4a3a;
+}
+
+.back-btn,
+.back-btn-rose{
+padding:12px 30px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:#c75b5b;
+color:white;
+font-size:1rem;
+margin-top:20px;
+}
+
+.magic-btn{
+padding:20px 50px;
+font-size:2rem;
+border:none;
+border-radius:50px;
+background:white;
+color:#c75b5b;
+cursor:pointer;
+font-family:'Dancing Script',cursive;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+}
+
+.final-message{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+font-family:'Dancing Script',cursive;
+font-size:4rem;
+color:#c75b5b;
+transition:1s;
+text-align:center;
+}
+
+.final-message.show{
+transform:translate(-50%,-50%) scale(1);
+}
+
+.snoopy-celebration{
+position:absolute;
+bottom:30px;
+width:130px;
+display:none;
+}
+
+.snoopy-celebration.show{
+display:block;
+}
+
+#snoopyCelebration{
+right:20px;
+}
+
+#snoopyBirthday{
+left:20px;
+}
+
+.snoopy-celebration img{
+width:100%;
+}
+
+#heartCanvas{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+}
+
+@media(max-width:600px){
+.title-main{
+font-size:3rem;
+}
+.bouquet-img{
+width:220px;
+height:280px;
+}
+.final-message{
+font-size:2.3rem;
+}
+}
+</style>
+</head>
+
+<body>
+
+<section class="main-screen" id="mainScreen">
+
+<h1 class="title-main">Para Ti, Mi Caramelito ❤️</h1>
+<p class="subtitle-main">Elige un ramo para descubrir tu sorpresa</p>
+
+<div class="bouquets-container">
+
+<div class="bouquet-card" onclick="goToSunflower()">
+<img src="girasoles.jpg" class="bouquet-img">
+<div class="press-here">🌻 Presiona aquí</div>
+</div>
+
+<div class="bouquet-card" onclick="goToRose()">
+<img src="rosas.jpg" class="bouquet-img">
+<div class="press-here">🌹 Presiona aquí</div>
+</div>
+
+</div>
+
+</section>
+
+<section class="sunflower-section" id="sunflowerSection">
+
+<div class="envelope-container" id="envelope" onclick="openEnvelope()">
+<div class="envelope-back"></div>
+<div class="envelope-front"></div>
+<div class="envelope-flap"></div>
+<div class="envelope-seal">❤</div>
+</div>
+
+<div class="letter-container" id="letterContainer">
+
+<div class="letter-header">
+<h2>Para Mi Niña Preciosa</h2>
+</div>
+
+<div class="letter-body">
+
+<p>Mi niña preciosa:</p>
+
+<p>Eres una persona muy especial, amorosa y alegre.</p>
+
+<p>Gracias por alegrar mis días, por ser motivo de muchas sonrisas y por todos los momentos compartidos.</p>
+
+<p>Hoy quiero desearte un muy feliz cumpleaños.</p>
+
+<p>Que Dios te bendiga siempre, te permita cumplir cada uno de tus sueños y te acompañe en cada meta que te propongas.</p>
+
+<p>También le pido que te regale muchísima paciencia para soportarme durante muchos años más 😅.</p>
+
+<p>Te quiero muchísimo ❤️</p>
+
+<center>
+<button class="back-btn" onclick="goBack()">Volver</button>
+</center>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="rose-section" id="roseSection">
+
+<button class="magic-btn" onclick="showLove()">
+✨ Presióname ✨
+</button>
+
+<canvas id="heartCanvas"></canvas>
+
+<div class="final-message" id="finalMessage">
+Te quiero mi caramelito ❤️
+</div>
+
+<div class="snoopy-celebration" id="snoopyCelebration">
+<img src="snoopy_confeti.jpg">
+</div>
+
+<div class="snoopy-celebration" id="snoopyBirthday">
+<img src="snoopy_cumple.jpg">
+</div>
+
+</section>
+
+<script>
+
+function goToSunflower(){
+document.getElementById("mainScreen").style.display="none";
+document.getElementById("sunflowerSection").classList.add("active");
+}
+
+function goToRose(){
+document.getElementById("mainScreen").style.display="none";
+document.getElementById("roseSection").classList.add("active");
+}
+
+function goBack(){
+location.reload();
+}
+
+function openEnvelope(){
+document.getElementById("envelope").classList.add("opened");
+
+setTimeout(()=>{
+document.getElementById("letterContainer").classList.add("visible");
+},700);
+}
+
+function showLove(){
+
+document.getElementById("finalMessage").classList.add("show");
+
+document.getElementById("snoopyCelebration").classList.add("show");
+document.getElementById("snoopyBirthday").classList.add("show");
+
+const canvas=document.getElementById("heartCanvas");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let hearts=[];
+
+for(let i=0;i<150;i++){
+hearts.push({
+x:Math.random()*canvas.width,
+y:canvas.height+Math.random()*500,
+size:Math.random()*10+5,
+speed:Math.random()*3+1
+});
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+hearts.forEach(h=>{
+
+ctx.fillStyle="#ff4d6d";
+
+ctx.beginPath();
+
+ctx.arc(h.x,h.y,h.size,0,Math.PI*2);
+
+ctx.fill();
+
+h.y-=h.speed;
+
+if(h.y<0){
+h.y=canvas.height;
+}
+
+});
+
+requestAnimationFrame(animate);
+}
+
+animate();
+}
+
+</script>
+
+</body>
+</html>
