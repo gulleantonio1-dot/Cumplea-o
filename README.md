@@ -1,2 +1,0 @@
-# Cumplea-o
-Te quiero 
